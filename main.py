@@ -41,3 +41,15 @@ CORS(app)
 @app.route('/')
 def hello():
     return "Hello World"
+
+
+@app.route('/ira-q-and-a')
+def ira_q_and_a():
+    conn = get_connection()
+    df = pd.read_sql(sql.text("SELECT * FROM ira_questions_and_answers"), conn)
+    return df.to_json(orient="records")
+
+
+def get_connection():
+    return sqlalchemy.create_engine(os.getenv("SUPABASE_CONN_STRING")).connect()
+
