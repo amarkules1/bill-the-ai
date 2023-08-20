@@ -40,9 +40,12 @@ statsmodels = "*"
 waitress = "*"
 scipy = "*"
 beautifulsoup4 = "*"
-llama-index = "*"
+llama-index = "==0.8.5.post1"
 nltk = "*"
-
+pinecone-client = "*"
+transformers = "*"
+cdifflib = "*"
+python-levenshtein = "*"
 
 [dev-packages]
 

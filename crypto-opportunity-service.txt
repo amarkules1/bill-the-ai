@@ -1,0 +1,246 @@
+2023-08-20 13:37:32,743 - main - ERROR - Exception on /ira-query [GET]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 74, in ira_query
+    answer_row = run_query(query)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 79, in run_query
+    answer = str(index.as_query_engine().query(query))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\llama_index\indices\query\base.py", line 23, in query
+    response = self._query(str_or_query_bundle)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\llama_index\query_engine\retriever_query_engine.py", line 169, in _query
+    nodes = self.retrieve(query_bundle)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\llama_index\query_engine\retriever_query_engine.py", line 117, in retrieve
+    nodes = self._retriever.retrieve(query_bundle)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\llama_index\indices\base_retriever.py", line 22, in retrieve
+    return self._retrieve(str_or_query_bundle)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\llama_index\indices\vector_store\retrievers\retriever.py", line 75, in _retrieve
+    return self._get_nodes_with_embeddings(query_bundle)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\llama_index\indices\vector_store\retrievers\retriever.py", line 151, in _get_nodes_with_embeddings
+    query_result = self._vector_store.query(query, **self._kwargs)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\llama_index\vector_stores\pinecone.py", line 276, in query
+    response = self._pinecone_index.query(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pinecone\core\utils\error_handling.py", line 15, in inner_func
+    Config.validate()  # raises exceptions in case of invalid config
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pinecone\config.py", line 56, in validate
+    raise ApiKeyError("You haven't specified an Api-Key.")
+pinecone.core.client.exceptions.ApiKeyError: "You haven't specified an Api-Key."
+2023-08-20 13:38:10,633 - main - ERROR - Exception on /ira-query [GET]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\connection.py", line 414, in connect
+    self.sock = ssl_wrap_socket(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\util\ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\util\ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "C:\Users\amarl\AppData\Local\Programs\Python\Python310\lib\ssl.py", line 513, in wrap_socket
+    return self.sslsocket_class._create(
+  File "C:\Users\amarl\AppData\Local\Programs\Python\Python310\lib\ssl.py", line 1071, in _create
+    self.do_handshake()
+  File "C:\Users\amarl\AppData\Local\Programs\Python\Python310\lib\ssl.py", line 1342, in do_handshake
+    self._sslobj.do_handshake()
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pinecone\core\utils\error_handling.py", line 17, in inner_func
+    return func(*args, **kwargs)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pinecone\index.py", line 455, in query
+    response = self._vector_api.query(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pinecone\core\client\api_client.py", line 776, in __call__
+    return self.callable(self, *args, **kwargs)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pinecone\core\client\api\vector_operations_api.py", line 716, in __query
+    return self.call_with_http_info(**kwargs)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pinecone\core\client\api_client.py", line 838, in call_with_http_info
+    return self.api_client.call_api(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pinecone\core\client\api_client.py", line 413, in call_api
+    return self.__call_api(resource_path, method,
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pinecone\core\client\api_client.py", line 200, in __call_api
+    response_data = self.request(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pinecone\core\client\api_client.py", line 459, in request
+    return self.rest_client.POST(url,
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pinecone\core\client\rest.py", line 271, in POST
+    return self.request("POST", url,
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pinecone\core\client\rest.py", line 157, in request
+    r = self.pool_manager.request(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\request.py", line 78, in request
+    return self.request_encode_body(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\poolmanager.py", line 376, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\util\retry.py", line 550, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\packages\six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\connection.py", line 414, in connect
+    self.sock = ssl_wrap_socket(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\util\ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\urllib3\util\ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "C:\Users\amarl\AppData\Local\Programs\Python\Python310\lib\ssl.py", line 513, in wrap_socket
+    return self.sslsocket_class._create(
+  File "C:\Users\amarl\AppData\Local\Programs\Python\Python310\lib\ssl.py", line 1071, in _create
+    self.do_handshake()
+  File "C:\Users\amarl\AppData\Local\Programs\Python\Python310\lib\ssl.py", line 1342, in do_handshake
+    self._sslobj.do_handshake()
+urllib3.exceptions.ProtocolError: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 74, in ira_query
+    answer_row = run_query(query)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 79, in run_query
+    answer = str(index.as_query_engine().query(query))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\llama_index\indices\query\base.py", line 23, in query
+    response = self._query(str_or_query_bundle)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\llama_index\query_engine\retriever_query_engine.py", line 169, in _query
+    nodes = self.retrieve(query_bundle)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\llama_index\query_engine\retriever_query_engine.py", line 117, in retrieve
+    nodes = self._retriever.retrieve(query_bundle)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\llama_index\indices\base_retriever.py", line 22, in retrieve
+    return self._retrieve(str_or_query_bundle)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\llama_index\indices\vector_store\retrievers\retriever.py", line 75, in _retrieve
+    return self._get_nodes_with_embeddings(query_bundle)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\llama_index\indices\vector_store\retrievers\retriever.py", line 151, in _get_nodes_with_embeddings
+    query_result = self._vector_store.query(query, **self._kwargs)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\llama_index\vector_stores\pinecone.py", line 276, in query
+    response = self._pinecone_index.query(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pinecone\core\utils\error_handling.py", line 25, in inner_func
+    raise PineconeProtocolError(f'Failed to connect; did you specify the correct index name?') from e
+pinecone.core.exceptions.PineconeProtocolError: Failed to connect; did you specify the correct index name?
+2023-08-20 13:39:23,241 - main - ERROR - Exception on /ira-query [GET]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 747, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.SyntaxError: syntax error at or near "does"
+LINE 1: ...T INTO ira_queries (question, answer) VALUES (How does this ...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 75, in ira_query
+    answer_row = run_query(query)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 82, in run_query
+    conn.execute(sqlalchemy.text(f"INSERT INTO ira_queries (question, answer) VALUES ({query}, {answer})"))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1414, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 489, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1842, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2325, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 747, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.SyntaxError) syntax error at or near "does"
+LINE 1: ...T INTO ira_queries (question, answer) VALUES (How does this ...
+                                                             ^
+
+[SQL: INSERT INTO ira_queries (question, answer) VALUES (How does this bill effect stock repurchases?, This bill imposes a 1 percent tax on the fair market value of any stock repurchased by a covered corporation during the taxable year. The term "repurchase" includes redemptions of stock and any transaction determined by the Secretary to be economically similar to a redemption. The amount subject to the tax is reduced by the fair market value of any stock issued by the covered corporation during the taxable year, including stock issued or provided to employees.)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2023-08-20 13:39:54,110 - main - ERROR - Exception on /ira-query [GET]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 747, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "ira_queries" does not exist
+LINE 1: INSERT INTO ira_queries (question, answer) VALUES ('How does...
+                    ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 75, in ira_query
+    answer_row = run_query(query)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 82, in run_query
+    conn.execute(sqlalchemy.text(f"INSERT INTO ira_queries (question, answer) VALUES ('{query}', '{answer}')"))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1414, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 489, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1842, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2325, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 747, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "ira_queries" does not exist
+LINE 1: INSERT INTO ira_queries (question, answer) VALUES ('How does...
+                    ^
+
+[SQL: INSERT INTO ira_queries (question, answer) VALUES ('How does this bill effect stock repurchases?', 'This bill imposes a 1 percent tax on the fair market value of any stock repurchased by a covered corporation during the taxable year. The term "repurchase" includes redemptions of stock and any transaction determined by the Secretary to be economically similar. The amount subject to the tax is reduced by the fair market value of any stock issued by the covered corporation during the taxable year, including stock issued or provided to employees.')]
+(Background on this error at: https://sqlalche.me/e/20/f405)
