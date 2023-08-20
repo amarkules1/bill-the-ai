@@ -33,7 +33,7 @@ handler2.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s 
 logger.addHandler(handler2)
 
 # Flask setup
-app = Flask(__name__, static_folder='crypto-opportunity-front-end/dist', static_url_path='')
+app = Flask(__name__, static_folder='bill-ai-frontend/dist', static_url_path='')
 limiter = Limiter(
     get_remote_address,
     app=app,
@@ -50,14 +50,12 @@ index = VectorStoreIndex.from_vector_store(vector_store=vector_store)
 
 @app.route('/')
 def hello():
-    return "Hello World"
+    return redirect("/index.html", code=302)
 
 
 @app.route('/ira-q-and-a')
 def ira_q_and_a():
-    conn = get_connection()
     df = get_ira_questions_and_answers()
-
     return df.to_json(orient="records")
 
 
