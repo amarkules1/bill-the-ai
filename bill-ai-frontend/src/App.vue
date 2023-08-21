@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <!-- <div class="header">
     <div class="headshot">
     <img alt="Vue logo" src="./assets/logo.png">
     </div>
@@ -17,18 +17,21 @@
       </ul>
     </p>
     </div>
-  </div>
+  </div> -->
+  <IntroComponent/>
   <br/>
   <QuestionsAndAnswers/>
 </template>
 
 <script>
 import QuestionsAndAnswers from './components/QuestionsAndAnswers.vue'
+import IntroComponent from './components/IntroComponent.vue'
 
 export default {
   name: 'App',
   components: {
-    QuestionsAndAnswers
+    QuestionsAndAnswers,
+    IntroComponent
   }
 }
 </script>
@@ -47,21 +50,5 @@ html, body {
   margin-right: auto;
   margin-left: auto;
   width: 90%;
-}
-
-.header {
-  display: inline-block;
-
-}
-
-.headshot {
-  float:left;
-  
-  width: 30%;
-}
-.intro{
-  width: 60%;
-  float:right;
-  text-align: left;
 }
 </style>
