@@ -52,6 +52,7 @@ def hello():
 
 @app.route('/ira-q-and-a')
 def ira_q_and_a():
+    logger.info("ira-q-and-a")
     df = get_ira_questions_and_answers()
     return df.to_json(orient="records")
 
@@ -64,7 +65,7 @@ def ira_query():
     df = get_ira_questions_and_answers()
     most_similar_score = 0
     answer_row = None
-    for index, row in df.iterrows():
+    for i, row in df.iterrows():
         score = get_similarity_score(query, row['question'])
         if score > most_similar_score and score > 0.85:
             most_similar_score = score

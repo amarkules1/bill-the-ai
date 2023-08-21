@@ -20,8 +20,8 @@ COPY main.py .
 # Copy the mjb-tweet-frontend/dist directory to the same in the container
 COPY bill-ai-frontend/dist bill-ai-frontend/dist
 
-# Expose port 5002
-EXPOSE 5000
+# Expose port 80
+EXPOSE 80
 
 # Command to run the application
-CMD ["waitress-serve", "--port=5000", "main:app"]
+CMD ["waitress-serve", "--port=80", "main:app"]
