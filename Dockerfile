@@ -5,7 +5,7 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # Copy Pipfile and Pipfile.lock to the working directory
-COPY Pipfile Pipfile.lock secret_sauce.json ./
+COPY Pipfile Pipfile.lock .env ./
 
 # Install pipenv, libpq-dev, and use pipenv to install Python dependencies
 RUN apt-get update && apt-get install -y gcc libpq-dev && \
@@ -18,10 +18,10 @@ RUN apt-get update && apt-get install -y gcc libpq-dev && \
 COPY main.py .
 
 # Copy the mjb-tweet-frontend/dist directory to the same in the container
-COPY crypto-opportunity-front-end/dist crypto-opportunity-front-end/dist
+COPY bill-ai-frontend/dist bill-ai-frontend/dist
 
 # Expose port 5002
-EXPOSE 5002
+EXPOSE 5000
 
 # Command to run the application
-CMD ["waitress-serve", "--port=5002", "main:app"]
+CMD ["waitress-serve", "--port=5000", "main:app"]

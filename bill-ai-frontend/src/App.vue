@@ -7,7 +7,7 @@
       
     <h1>Ask Bill a question about the Inflation Reduction Act</h1>
     <p>Bill is the AI that reads the laws that congress passes and explains them to you. 
-      He's only read the Inflation Reduction Act so far, but he's working on more.
+      He's only read the <a href="https://en.wikipedia.org/wiki/Inflation_Reduction_Act">Inflation Reduction Act</a> so far, but he's working on more.
       Read through some of the questions bellow, then ask Bill your own question.
       Here are some tips about how to ask Bill a good question:
       <ul>

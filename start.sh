@@ -1,7 +1,7 @@
 #!/bin/bash
-app="cryptoopportunityservice"
+app="bill-the-ai"
 docker build -t ${app} .
-docker run -d -p 5002:5002 \
+docker run -d -p 5000:5000 \
   --name=${app} \
   -v $PWD:/app ${app}
 read -n1 -s
