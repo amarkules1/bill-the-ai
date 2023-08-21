@@ -24,4 +24,4 @@ COPY bill-ai-frontend/dist bill-ai-frontend/dist
 EXPOSE 80
 
 # Command to run the application
-CMD ["waitress-serve", "--port=80", "main:app", "--ssl ./cert.pem", "--ssl-certificate ./privkey.pem"]
+CMD ["waitress-serve", "--port=80", "main:app", "--ssl ./cert.pem", "--ssl-certificate ./key.pem"]
