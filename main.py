@@ -11,6 +11,7 @@ from Levenshtein import distance as lev
 import llama_index
 from llama_index import VectorStoreIndex
 import pinecone
+import openai
 
 from dotenv import load_dotenv, find_dotenv
 
@@ -22,7 +23,7 @@ logger.setLevel(logging.DEBUG)
 handler1 = logging.StreamHandler()
 handler1.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
 logger.addHandler(handler1)
-handler2 = logging.FileHandler('crypto-opportunity-service.txt')
+handler2 = logging.FileHandler('bill-the-ai-log.txt')
 handler2.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
 logger.addHandler(handler2)
 
@@ -40,6 +41,8 @@ CORS(app)
 pinecone.init(api_key=os.getenv("PINECONE_API_KEY"), environment="gcp-starter")
 vector_store = llama_index.vector_stores.PineconeVectorStore(pinecone.Index("bill-the-ai-index-2"))
 index = VectorStoreIndex.from_vector_store(vector_store=vector_store)
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 @app.route('/')
@@ -74,8 +77,9 @@ def ira_query():
 def run_query(query):
     answer = str(index.as_query_engine().query(query))
     conn = get_connection()
-    conn.execute(
-        sqlalchemy.text(f"INSERT INTO ira_questions_and_answers (question, answer) VALUES ('{query}', '{answer}')"))
+    ins = sqlalchemy.text(f"INSERT INTO ira_questions_and_answers (question, answer) VALUES (:query, :answer)")
+    ins = ins.bindparams(query=query, answer=answer)
+    conn.execute(ins)
     conn.commit()
     conn.close()
     return pd.Series(data={"answer": answer, "question": query})
