@@ -15,7 +15,7 @@
       <div v-for="item in questionsAndAnswers" :key="item.question" class="card mb-3">
         <div class="card-body">
           <p><strong>Question:</strong> {{ item.question }}</p>
-          <p>Answer: {{ item.answer }}</p>
+          <p><strong>Answer:</strong> {{ item.answer }}</p>
         </div>
       </div>
     </div>
