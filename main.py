@@ -52,7 +52,6 @@ def hello():
 
 @app.route('/ira-q-and-a')
 def ira_q_and_a():
-    logger.info("ira-q-and-a")
     df = get_ira_questions_and_answers()
     return df.to_json(orient="records")
 

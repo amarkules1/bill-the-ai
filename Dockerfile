@@ -5,7 +5,7 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # Copy Pipfile and Pipfile.lock to the working directory
-COPY Pipfile Pipfile.lock .env ./
+COPY Pipfile Pipfile.lock .env cert.pem key.pem ./
 
 # Install pipenv, libpq-dev, and use pipenv to install Python dependencies
 RUN apt-get update && apt-get install -y gcc libpq-dev && \
@@ -24,4 +24,4 @@ COPY bill-ai-frontend/dist bill-ai-frontend/dist
 EXPOSE 80
 
 # Command to run the application
-CMD ["waitress-serve", "--port=80", "main:app"]
+CMD ["waitress-serve", "--port=80", "main:app", "--ssl ./cert.pem", "--ssl-certificate ./privkey.pem"]
