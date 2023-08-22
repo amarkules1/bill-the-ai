@@ -2,6 +2,7 @@
 url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
+
 [packages]
 pandas = "*"
 requests = "*"
@@ -43,7 +44,9 @@ pinecone-client = "*"
 transformers = "*"
 cdifflib = "*"
 python-levenshtein = "*"
-
+talisman = "*"
+flask-talisman = "*"
+gunicorn = "*"
 
 [dev-packages]
 
