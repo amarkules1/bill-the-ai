@@ -1,3 +1,5 @@
+import re
+
 from flask import Flask, request, redirect
 import pandas as pd
 import sqlalchemy
@@ -44,6 +46,8 @@ index = VectorStoreIndex.from_vector_store(vector_store=vector_store)
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,6}$')
+
 
 @app.route('/')
 def hello():
@@ -72,6 +76,34 @@ def ira_query():
     if answer_row is None:
         answer_row = run_query(query)
     return answer_row.to_json()
+
+
+@app.route('/subscribe', methods=['POST'])
+def subscribe():
+    body = request.form.to_dict()
+    if body is None or body['email'] is None or not EMAIL_REGEX.match(body['email']):
+        return {"error": "Please provide a valid email address"}, 400
+    conn = get_connection()
+    ins = sqlalchemy.text(f"INSERT INTO bill_update_subscribers (name, email) VALUES (:name, :email)")
+    ins = ins.bindparams(name=body['name'] if 'name' in body.keys() else None, email=body['email'])
+    conn.execute(ins)
+    conn.commit()
+    conn.close()
+    return {"success": True}
+
+
+@app.route('/unsubscribe', methods=['POST'])
+def unsubscribe():
+    body = request.form.to_dict()
+    if body is None or body['email'] is None or not EMAIL_REGEX.match(body['email']):
+        return {"error": "Please provide a valid email address"}, 400
+    conn = get_connection()
+    ins = sqlalchemy.text(f"DELETE FROM bill_update_subscribers WHERE email = :email")
+    ins = ins.bindparams(email=body['email'])
+    conn.execute(ins)
+    conn.commit()
+    conn.close()
+    return {"success": True}
 
 
 def run_query(query):
