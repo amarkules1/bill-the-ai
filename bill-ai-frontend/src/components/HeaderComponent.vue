@@ -27,7 +27,8 @@ export default {
 
 .nav-buttons {
   display: flex;
-  float:right;
+  float: right;
+  padding-top: 10px
 }
 
 .btn {
@@ -55,5 +56,6 @@ export default {
   color: white;
   font-size: 44px;
   font-weight: 600;
+  float:left;
 }
 </style>
