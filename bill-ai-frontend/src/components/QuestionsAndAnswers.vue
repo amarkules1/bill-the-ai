@@ -1,4 +1,7 @@
 <template>
+  <div class="qaComponent"></div>
+  <IntroComponent/>
+  <br/>
   <div>
     <div class="form-group d-flex queryBox">
       <input type="text" class="form-control form-control-lg flex-grow-1" v-model="userQuery"
@@ -23,8 +26,13 @@
 </template>
 
 <script>
+import IntroComponent from './IntroComponent.vue';
+
 export default {
   name: 'QuestionsAndAnswers',
+  components: {
+    IntroComponent
+  },
 
   data() {
     return {
@@ -59,5 +67,11 @@ export default {
 <style>
 .queryBox {
   margin-bottom: 20px;
+}
+.qaComponent {
+  margin-top: 60px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 90%;
 }
 </style>
