@@ -15,7 +15,7 @@
       <span class="sr-only"></span>
     </div>
     <div v-if="!loadingQuestions">
-      <div v-for="item in questionsAndAnswers" :key="item.question" class="card mb-3">
+      <div v-for="item in questionsAndAnswers" :key="item.question" :class="{ 'selected': item.highlighted, 'card': true, 'mb-3': true}">
         <div class="card-body">
           <p><strong>Question:</strong> {{ item.question }}</p>
           <p><strong>Answer:</strong> {{ item.answer }}</p>
@@ -56,6 +56,7 @@ export default {
       this.loadingQuery = true;
       const response = await fetch(`/ira-query?query=${this.userQuery}`);
       this.queryResult = await response.json();
+      this.queryResult.highlighted = true
       this.questionsAndAnswers.unshift(this.queryResult);
       this.userQuery = '';
       this.loadingQuery = false;
@@ -73,5 +74,9 @@ export default {
   margin-right: auto;
   margin-left: auto;
   width: 90%;
+}
+.selected {
+  border: 5px solid #777;
+    border-radius: 8px;
 }
 </style>

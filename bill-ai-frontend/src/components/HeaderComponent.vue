@@ -27,23 +27,24 @@ export default {
 
 .nav-buttons {
   display: flex;
+  float:right;
 }
 
 .btn {
   text-decoration: none;
-  color: #555;
-  border: 1px solid white;
+  color: white;
+  border: 1px solid #555;
   padding: 10px;
   margin-right: 10px;
-  background-color: white;
+  background-color: #555;
   transition: background-color 0.3s;
   font-weight: 400;
 }
 
 .btn.active {
-  background-color: #555;
+  background-color: white;
   font-weight: 400;
-  color: white;
+  color: #555;
 }
 
 .btn:hover {
@@ -52,6 +53,7 @@ export default {
 
 .title {
   color: white;
-  font-size: 20px;
+  font-size: 44px;
+  font-weight: 600;
 }
 </style>

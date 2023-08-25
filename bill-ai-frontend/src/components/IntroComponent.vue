@@ -1,5 +1,5 @@
 <template>
-  <div class="container header">
+  <div class="container introComponent">
     <div class="row">
       <div class="headshot col-md-3">
         <img alt="Vue logo" src="../assets/logo.png">
@@ -31,7 +31,7 @@ export default {
 }
 </script>
 <style>
-.header {
+.introComponent {
   display: inline-block;
 }
 .headshot {
