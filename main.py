@@ -80,13 +80,17 @@ def ira_query():
 
 @app.route('/subscribe', methods=['POST'])
 def subscribe():
-    body = request.form.to_dict()
+    body = request.get_json()
     if body is None or body['email'] is None or not EMAIL_REGEX.match(body['email']):
         return {"error": "Please provide a valid email address"}, 400
     conn = get_connection()
-    ins = sqlalchemy.text(f"INSERT INTO bill_update_subscribers (name, email) VALUES (:name, :email)")
-    ins = ins.bindparams(name=body['name'] if 'name' in body.keys() else None, email=body['email'])
-    conn.execute(ins)
+    exists = sqlalchemy.text(f"SELECT * FROM bill_update_subscribers WHERE email = :email")
+    exists = exists.bindparams(email=body['email'])
+    result = conn.execute(exists)
+    if result.rowcount == 0:
+        ins = sqlalchemy.text(f"INSERT INTO bill_update_subscribers (name, email) VALUES (:name, :email)")
+        ins = ins.bindparams(name=body['name'] if 'name' in body.keys() else None, email=body['email'])
+        conn.execute(ins)
     conn.commit()
     conn.close()
     return {"success": True}
@@ -94,7 +98,7 @@ def subscribe():
 
 @app.route('/unsubscribe', methods=['POST'])
 def unsubscribe():
-    body = request.form.to_dict()
+    body = request.get_json()
     if body is None or body['email'] is None or not EMAIL_REGEX.match(body['email']):
         return {"error": "Please provide a valid email address"}, 400
     conn = get_connection()

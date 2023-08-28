@@ -4,7 +4,7 @@
       <div class="headshot col-md-3">
         <img alt="Vue logo" src="../assets/logo.png">
       </div>
-      <div class="intro col-md-9">
+      <div class="intro col-md-8">
         <h1>Ask Bill a question about the Inflation Reduction Act</h1>
         <p>Bill is the AI that reads the laws that congress passes and explains them to you.
           He's only read the <a href="https://en.wikipedia.org/wiki/Inflation_Reduction_Act">Inflation Reduction Act</a>

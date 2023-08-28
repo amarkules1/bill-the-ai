@@ -27,4 +27,4 @@ COPY bill-ai-frontend/dist bill-ai-frontend/dist
 EXPOSE 443
 
 # Command to run the application
-CMD ["python3", "-m", "gunicorn", "-w", "4", "-b", "0.0.0.0:443","--certfile", "./fullchain.pem","--keyfile", "./privkey.pem", "main:app"]
+CMD ["python3", "-m", "gunicorn", "-w", "1", "-b", "0.0.0.0:443","--certfile", "./fullchain.pem","--keyfile", "./privkey.pem", "main:app"]

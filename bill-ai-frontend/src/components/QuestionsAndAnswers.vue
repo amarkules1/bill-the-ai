@@ -4,7 +4,7 @@
   <br/>
   <div>
     <div class="form-group d-flex queryBox">
-      <input type="text" class="form-control form-control-lg flex-grow-1" v-model="userQuery"
+      <input type="text" class="form-control form-control-lg flex-grow-1 queryInput" v-model="userQuery"
         placeholder="Ask Bill a question about the Inflation Reduction Act" />
       <button v-if="!loadingQuery" class="btn btn-info ml-2" @click="submitQuery" :disabled="userQuery.length < 20">Submit</button>
       <div v-if="loadingQuery" class="spinner-border" role="status">
@@ -14,7 +14,7 @@
     <div v-if="loadingQuestions" class="spinner-border" role="status">
       <span class="sr-only"></span>
     </div>
-    <div v-if="!loadingQuestions">
+    <div v-if="!loadingQuestions" class="qnaContainer">
       <div v-for="item in questionsAndAnswers" :key="item.question" :class="{ 'selected': item.highlighted, 'card': true, 'mb-3': true}">
         <div class="card-body">
           <p><strong>Question:</strong> {{ item.question }}</p>
@@ -68,15 +68,31 @@ export default {
 <style>
 .queryBox {
   margin-bottom: 20px;
+  width: 90%;
+  display: inline-flex;
+  margin-left: auto;
+  margin-right: auto;
 }
+
 .qaComponent {
   margin-top: 60px;
   margin-right: auto;
   margin-left: auto;
   width: 90%;
 }
+
 .selected {
   border: 5px solid #777;
     border-radius: 8px;
+}
+
+.queryInput {
+  margin-right: 10px;
+}
+
+.qnaContainer {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

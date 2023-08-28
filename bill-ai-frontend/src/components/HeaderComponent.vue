@@ -4,7 +4,7 @@
             <div class="title">Bill the AI</div>
             <div class="nav-buttons">
                 <router-link class="btn" active-class="active" to="/home">Home</router-link>
-                <router-link class="btn" active-class="active" to="/signup">Sign Up</router-link>
+                <!-- <router-link class="btn" active-class="active" to="/signup">Sign Up</router-link> -->
             </div>
         </nav>
     </div>
