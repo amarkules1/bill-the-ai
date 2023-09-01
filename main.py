@@ -1,4 +1,5 @@
 import re
+import uuid
 
 from flask import Flask, request, redirect
 import pandas as pd
@@ -87,9 +88,12 @@ def subscribe():
     exists = sqlalchemy.text(f"SELECT * FROM bill_update_subscribers WHERE email = :email")
     exists = exists.bindparams(email=body['email'])
     result = conn.execute(exists)
+    verification_id = uuid.uuid4()
     if result.rowcount == 0:
-        ins = sqlalchemy.text(f"INSERT INTO bill_update_subscribers (name, email) VALUES (:name, :email)")
-        ins = ins.bindparams(name=body['name'] if 'name' in body.keys() else None, email=body['email'])
+        ins = sqlalchemy.text("INSERT INTO bill_update_subscribers (name, email, verification_id, is_active) "
+                              "VALUES (:name, :email, :id, FALSE)")
+        ins = ins.bindparams(name=body['name'] if 'name' in body.keys() else None,
+                             email=body['email'], id=verification_id)
         conn.execute(ins)
     conn.commit()
     conn.close()
@@ -102,9 +106,29 @@ def unsubscribe():
     if body is None or body['email'] is None or not EMAIL_REGEX.match(body['email']):
         return {"error": "Please provide a valid email address"}, 400
     conn = get_connection()
-    ins = sqlalchemy.text(f"DELETE FROM bill_update_subscribers WHERE email = :email")
+    ins = sqlalchemy.text("UPDATE bill_update_subscribers SET unsubscribe_dt = NOW(), is_active = FALSE"
+                          " WHERE email = :email")
     ins = ins.bindparams(email=body['email'])
     conn.execute(ins)
+    conn.commit()
+    conn.close()
+    return {"success": True}
+
+
+@app.route('/verify-email', methods=['POST'])
+def verify_email():
+    body = request.get_json()
+    if body is None or 'email' not in body.keys() or 'id' not in body.keys():
+        return {"error": "Missing Request Params"}, 400
+    conn = get_connection()
+    query = sqlalchemy.text(f"SELECT * FROM bill_update_subscribers WHERE email = :email and verification_id = :id")
+    query = query.bindparams(email=body['email'], id=body['id'])
+    result = conn.execute(query)
+    if result.rowcount == 0:
+        return {"error": "Invalid Verification Code"}, 400
+    upd = sqlalchemy.text(f"UPDATE bill_update_subscribers SET is_active = true WHERE email = :email")
+    upd = upd.bindparams(email=body['email'])
+    conn.execute(upd)
     conn.commit()
     conn.close()
     return {"success": True}

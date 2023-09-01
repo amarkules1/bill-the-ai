@@ -47,6 +47,7 @@ python-levenshtein = "*"
 talisman = "*"
 flask-talisman = "*"
 gunicorn = "*"
+boto3 = "*"
 
 [dev-packages]
 
