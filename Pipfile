@@ -48,6 +48,7 @@ talisman = "*"
 flask-talisman = "*"
 gunicorn = "*"
 boto3 = "*"
+sendgrid = "*"
 
 [dev-packages]
 

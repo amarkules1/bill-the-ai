@@ -18,6 +18,8 @@ import openai
 
 from dotenv import load_dotenv, find_dotenv
 
+from email_verification import welcome_email
+
 _ = load_dotenv(find_dotenv())  # read local .env file
 
 # create console logger and file logger
@@ -87,14 +89,17 @@ def subscribe():
     conn = get_connection()
     exists = sqlalchemy.text(f"SELECT * FROM bill_update_subscribers WHERE email = :email")
     exists = exists.bindparams(email=body['email'])
-    result = conn.execute(exists)
+    result = pd.read_sql(exists, conn)
     verification_id = uuid.uuid4()
-    if result.rowcount == 0:
+    if result.shape[0] == 0:
         ins = sqlalchemy.text("INSERT INTO bill_update_subscribers (name, email, verification_id, is_active) "
                               "VALUES (:name, :email, :id, FALSE)")
         ins = ins.bindparams(name=body['name'] if 'name' in body.keys() else None,
                              email=body['email'], id=verification_id)
         conn.execute(ins)
+    else:
+        verification_id = result['verification_id'][0]
+    welcome_email.send_email(body['email'], verification_id)
     conn.commit()
     conn.close()
     return {"success": True}

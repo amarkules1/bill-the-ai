@@ -20,7 +20,7 @@
       </div>
       <div class="subscribe col-md-8" v-if="isSuccess">
         <h1>Success</h1>
-        <p>You should receive a verification email from bill.the.ai.guy@gmail.com.
+        <p>You should receive a verification email from support@billtheai.com.
            Once you verify your email, we'll send you periodic updates about Bill the AI. 
            You can unsubscribe at any time <router-link to="/unsubscribe">here</router-link>.</p>
       </div>
