@@ -87,12 +87,12 @@ def subscribe():
     if body is None or body['email'] is None or not EMAIL_REGEX.match(body['email']):
         return {"error": "Please provide a valid email address"}, 400
     conn = get_connection()
-    exists = sqlalchemy.text(f"SELECT * FROM bill_update_subscribers WHERE email = :email")
+    exists = sqlalchemy.text(f"SELECT * FROM bill_gpt.bill_update_subscribers WHERE email = :email")
     exists = exists.bindparams(email=body['email'])
     result = pd.read_sql(exists, conn)
     verification_id = uuid.uuid4()
     if result.shape[0] == 0:
-        ins = sqlalchemy.text("INSERT INTO bill_update_subscribers (name, email, verification_id, is_active) "
+        ins = sqlalchemy.text("INSERT INTO bill_gpt.bill_update_subscribers (name, email, verification_id, is_active) "
                               "VALUES (:name, :email, :id, FALSE)")
         ins = ins.bindparams(name=body['name'] if 'name' in body.keys() else None,
                              email=body['email'], id=verification_id)
@@ -111,7 +111,7 @@ def unsubscribe():
     if body is None or body['email'] is None or not EMAIL_REGEX.match(body['email']):
         return {"error": "Please provide a valid email address"}, 400
     conn = get_connection()
-    ins = sqlalchemy.text("UPDATE bill_update_subscribers SET unsubscribe_dt = NOW(), is_active = FALSE"
+    ins = sqlalchemy.text("UPDATE bill_gpt.bill_update_subscribers SET unsubscribe_dt = NOW(), is_active = FALSE"
                           " WHERE email = :email")
     ins = ins.bindparams(email=body['email'])
     conn.execute(ins)
@@ -126,12 +126,12 @@ def verify_email():
     if body is None or 'email' not in body.keys() or 'id' not in body.keys():
         return {"error": "Missing Request Params"}, 400
     conn = get_connection()
-    query = sqlalchemy.text(f"SELECT * FROM bill_update_subscribers WHERE email = :email and verification_id = :id")
+    query = sqlalchemy.text(f"SELECT * FROM bill_gpt.bill_update_subscribers WHERE email = :email and verification_id = :id")
     query = query.bindparams(email=body['email'], id=body['id'])
     result = conn.execute(query)
     if result.rowcount == 0:
         return {"error": "Invalid Verification Code"}, 400
-    upd = sqlalchemy.text(f"UPDATE bill_update_subscribers SET is_active = true WHERE email = :email")
+    upd = sqlalchemy.text(f"UPDATE bill_gpt.bill_update_subscribers SET is_active = true WHERE email = :email")
     upd = upd.bindparams(email=body['email'])
     conn.execute(upd)
     conn.commit()
@@ -142,7 +142,7 @@ def verify_email():
 def run_query(query):
     answer = str(index.as_query_engine().query(query))
     conn = get_connection()
-    ins = sqlalchemy.text(f"INSERT INTO ira_questions_and_answers (question, answer) VALUES (:query, :answer)")
+    ins = sqlalchemy.text(f"INSERT INTO bill_gpt.ira_questions_and_answers (question, answer) VALUES (:query, :answer)")
     ins = ins.bindparams(query=query, answer=answer)
     conn.execute(ins)
     conn.commit()
@@ -152,14 +152,14 @@ def run_query(query):
 
 def get_ira_questions_and_answers():
     conn = get_connection()
-    df = pd.read_sql(sql.text("SELECT * FROM ira_questions_and_answers"), conn)
+    df = pd.read_sql(sql.text("SELECT * FROM bill_gpt.ira_questions_and_answers"), conn)
     conn.commit()
     conn.close()
     return df
 
 
 def get_connection():
-    return sqlalchemy.create_engine(os.getenv("SUPABASE_CONN_STRING")).connect()
+    return sqlalchemy.create_engine(os.getenv("LINODE_CONN_STRING")).connect()
 
 
 def get_similarity_score(st1, st2):
