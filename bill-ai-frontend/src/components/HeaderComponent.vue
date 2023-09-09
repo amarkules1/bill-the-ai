@@ -2,7 +2,7 @@
   <div id="headerComponent">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark header">
         <div class="container">
-            <a class="navbar-brand" href="">Bill The AI</a>
+            <a class="navbar-brand title" href="">Bill The AI</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,5 +31,10 @@ export default {
   padding: 10px;
   width: 100%;
   background-color: #555 !important;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 500;
 }
 </style>
