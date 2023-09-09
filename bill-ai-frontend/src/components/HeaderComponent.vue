@@ -1,13 +1,24 @@
 <template>
-    <div id="headerComponent">
-        <nav class="header">
-            <div class="title">Bill the AI</div>
-            <div class="nav-buttons">
-                <router-link class="btn" active-class="active" to="/home">Home</router-link>
-                <router-link class="btn" active-class="active" to="/signup">Sign Up</router-link>
+  <div id="headerComponent">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark header">
+        <div class="container">
+            <a class="navbar-brand" href="">Bill The AI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                      <router-link class="nav-link" active-class="active" to="/home">Home</router-link>
+                    </li>
+                    <li class="nav-item">
+                      <router-link class="nav-link" active-class="active" to="/signup">Get Updates</router-link>
+                    </li>
+                </ul>
             </div>
-        </nav>
-    </div>
+        </div>
+    </nav>
+  </div>
 </template>
   
 <script>
@@ -18,44 +29,7 @@ export default {
 <style>
 .header {
   padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
-  background-color: #555;
-}
-
-.nav-buttons {
-  display: flex;
-  float: right;
-  padding-top: 10px
-}
-
-.btn {
-  text-decoration: none;
-  color: white;
-  border: 1px solid #555;
-  padding: 10px;
-  margin-right: 10px;
-  background-color: #555;
-  transition: background-color 0.3s;
-  font-weight: 400;
-}
-
-.btn.active {
-  background-color: white;
-  font-weight: 400;
-  color: #555;
-}
-
-.btn:hover {
-  background-color: grey;
-}
-
-.title {
-  color: white;
-  font-size: 44px;
-  font-weight: 600;
-  float:left;
+  background-color: #555 !important;
 }
 </style>
