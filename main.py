@@ -120,13 +120,28 @@ def unsubscribe():
     return {"success": True}
 
 
+@app.route('/feedback', methods=['POST'])
+def feedback():
+    body = request.get_json()
+    conn = get_connection()
+    ins = sqlalchemy.text("INSERT INTO bill_gpt.app_feedback (feedback, email) "
+                          "VALUES (:feedback, :email)")
+    ins = ins.bindparams(email=body['email'] if 'email' in body.keys() else None,
+                         feedback=body['feedback'])
+    conn.execute(ins)
+    conn.commit()
+    conn.close()
+    return {"success": True}
+
+
 @app.route('/verify-email', methods=['POST'])
 def verify_email():
     body = request.get_json()
     if body is None or 'email' not in body.keys() or 'id' not in body.keys():
         return {"error": "Missing Request Params"}, 400
     conn = get_connection()
-    query = sqlalchemy.text(f"SELECT * FROM bill_gpt.bill_update_subscribers WHERE email = :email and verification_id = :id")
+    query = sqlalchemy.text(
+        f"SELECT * FROM bill_gpt.bill_update_subscribers WHERE email = :email and verification_id = :id")
     query = query.bindparams(email=body['email'], id=body['id'])
     result = conn.execute(query)
     if result.rowcount == 0:

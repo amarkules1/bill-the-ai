@@ -14,6 +14,9 @@
                     <li class="nav-item">
                       <router-link class="nav-link" active-class="active" to="/signup">Get Updates</router-link>
                     </li>
+                    <li class="nav-item">
+                      <router-link class="nav-link" active-class="active" to="/feedback">Give Feedback</router-link>
+                    </li>
                 </ul>
             </div>
         </div>
