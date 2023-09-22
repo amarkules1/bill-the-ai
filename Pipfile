@@ -49,6 +49,8 @@ flask-talisman = "*"
 gunicorn = "*"
 boto3 = "*"
 sendgrid = "*"
+pgvector = "*"
+asyncpg = "*"
 
 [dev-packages]
 

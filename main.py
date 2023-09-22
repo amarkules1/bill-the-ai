@@ -11,10 +11,10 @@ from flask_cors import CORS
 import logging
 import os
 from Levenshtein import distance as lev
-import llama_index
-from llama_index import VectorStoreIndex
-import pinecone
+from sqlalchemy import make_url
 import openai
+from llama_index.vector_stores import PGVectorStore
+from llama_index.indices.vector_store import VectorStoreIndex
 
 from dotenv import load_dotenv, find_dotenv
 
@@ -32,6 +32,7 @@ handler2 = logging.FileHandler('bill-the-ai-log.txt')
 handler2.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
 logger.addHandler(handler2)
 
+
 # Flask setup
 app = Flask(__name__, static_folder='bill-ai-frontend/dist', static_url_path='')
 limiter = Limiter(
@@ -42,9 +43,17 @@ limiter = Limiter(
 )
 CORS(app)
 
-# Pinecone setup (vector database)
-pinecone.init(api_key=os.getenv("PINECONE_API_KEY"), environment="gcp-starter")
-vector_store = llama_index.vector_stores.PineconeVectorStore(pinecone.Index("bill-the-ai-index-2"))
+connection_string = os.getenv("LINODE_CONN_STRING")
+url = make_url(connection_string)
+vector_store = PGVectorStore.from_params(
+    database="postgres",
+    host=url.host,
+    password=url.password,
+    port=url.port,
+    user=url.username,
+    table_name="inflation_reduction_act",
+    embed_dim=1536,  # openai embedding dimension
+)
 index = VectorStoreIndex.from_vector_store(vector_store=vector_store)
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
