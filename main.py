@@ -67,20 +67,20 @@ fra_vector_store = PGVectorStore.from_params(
 )
 fra_index = VectorStoreIndex.from_vector_store(vector_store=fra_vector_store)
 
-dppa_vector_store = PGVectorStore.from_params(
+chips_vector_store = PGVectorStore.from_params(
     database="postgres",
     host=url.host,
     password=url.password,
     port=url.port,
     user=url.username,
-    table_name="data_privacy_and_protection_act",
+    table_name="chips_act",
     embed_dim=1536,  # openai embedding dimension
 )
-dppa_index = VectorStoreIndex.from_vector_store(vector_store=dppa_vector_store)
+chips_index = VectorStoreIndex.from_vector_store(vector_store=chips_vector_store)
 index_lookup = {
     "ira": ira_index,
     "fra": fra_index,
-    "dppa": dppa_index
+    "chips": chips_index
 }
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -105,9 +105,9 @@ def fra_q_and_a():
     return df.to_json(orient="records")
 
 
-@app.route('/dppa-q-and-a')
-def fra_q_and_a():
-    df = get_bill_questions_and_answers("dppa")
+@app.route('/chips-q-and-a')
+def chips_q_and_a():
+    df = get_bill_questions_and_answers("chips")
     return df.to_json(orient="records")
 
 
@@ -147,12 +147,12 @@ def fra_query():
     return answer_row.to_json()
 
 
-@app.route('/dppa-query')
-def fra_query():
+@app.route('/chips-query')
+def chips_query():
     query = request.args.get('query')
     if query is None or len(query) < 20:
         return {}
-    df = get_bill_questions_and_answers("dppa")
+    df = get_bill_questions_and_answers("chips")
     most_similar_score = 0
     answer_row = None
     for i, row in df.iterrows():
@@ -161,8 +161,20 @@ def fra_query():
             most_similar_score = score
             answer_row = row
     if answer_row is None:
-        answer_row = run_query(query, "dppa")
+        answer_row = run_query(query, "chips")
     return answer_row.to_json()
+
+
+@app.route('/bill-summary')
+def bill_summary():
+    bill_id = request.args.get('bill_id')
+    conn = get_connection()
+    query = sql.text(f"SELECT * FROM bill_gpt.bill_details where bill_id = :bill_id")
+    query = query.bindparams(bill_id=bill_id)
+    df = pd.read_sql(query, conn)
+    conn.commit()
+    conn.close()
+    return df.iloc[0].to_json()
 
 
 @app.route('/subscribe', methods=['POST'])

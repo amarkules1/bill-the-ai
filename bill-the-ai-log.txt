@@ -1,0 +1,308 @@
+2023-09-24 13:00:08,099 - main - ERROR - Exception on /bill-summary [GET]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "bill_gpt.bill_summary" does not exist
+LINE 1: SELECT * FROM bill_gpt.bill_summary where bill_id = 'ira'
+                      ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 174, in bill_summary
+    df = pd.read_sql(query, conn)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 682, in read_sql
+    return pandas_sql.read_query(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1776, in read_query
+    result = self.execute(sql, params)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1600, in execute
+    return self.con.execute(sql, *args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1412, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1984, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "bill_gpt.bill_summary" does not exist
+LINE 1: SELECT * FROM bill_gpt.bill_summary where bill_id = 'ira'
+                      ^
+
+[SQL: SELECT * FROM bill_gpt.bill_summary where bill_id = %(bill_id)s]
+[parameters: {'bill_id': 'ira'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2023-09-24 13:00:37,551 - main - ERROR - Exception on /bill-summary [GET]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1487, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1506, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1837, in make_response
+    raise TypeError(
+TypeError: The view function did not return a valid response. The return type must be a string, dict, list, tuple with headers or status, Response instance, or WSGI callable, but it was a DataFrame.
+2023-09-24 13:00:40,170 - main - ERROR - Exception on /bill-summary [GET]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1487, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1506, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1837, in make_response
+    raise TypeError(
+TypeError: The view function did not return a valid response. The return type must be a string, dict, list, tuple with headers or status, Response instance, or WSGI callable, but it was a DataFrame.
+2023-09-24 13:12:09,972 - main - ERROR - Exception on /bill-summary [GET]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 177, in bill_summary
+    return df.iloc[0].to_json()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\core\indexing.py", line 1153, in __getitem__
+    return self._getitem_axis(maybe_callable, axis=axis)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\core\indexing.py", line 1714, in _getitem_axis
+    self._validate_integer(key, axis)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\core\indexing.py", line 1647, in _validate_integer
+    raise IndexError("single positional indexer is out-of-bounds")
+IndexError: single positional indexer is out-of-bounds
+2023-09-24 13:13:06,278 - main - ERROR - Exception on /bill-summary [GET]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 177, in bill_summary
+    return df.iloc[0].to_json()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\core\indexing.py", line 1153, in __getitem__
+    return self._getitem_axis(maybe_callable, axis=axis)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\core\indexing.py", line 1714, in _getitem_axis
+    self._validate_integer(key, axis)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\core\indexing.py", line 1647, in _validate_integer
+    raise IndexError("single positional indexer is out-of-bounds")
+IndexError: single positional indexer is out-of-bounds
+2023-09-24 13:13:22,786 - main - ERROR - Exception on /bill-summary [GET]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 177, in bill_summary
+    return df.iloc[0].to_json()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\core\indexing.py", line 1153, in __getitem__
+    return self._getitem_axis(maybe_callable, axis=axis)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\core\indexing.py", line 1714, in _getitem_axis
+    self._validate_integer(key, axis)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\core\indexing.py", line 1647, in _validate_integer
+    raise IndexError("single positional indexer is out-of-bounds")
+IndexError: single positional indexer is out-of-bounds
+2023-09-24 13:20:10,771 - main - ERROR - Exception on /chips-q-and-a [GET]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "bill_gpt.chips_questions_and_answers" does not exist
+LINE 1: SELECT * FROM bill_gpt.chips_questions_and_answers
+                      ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 110, in chips_q_and_a
+    df = get_bill_questions_and_answers("chips")
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 267, in get_bill_questions_and_answers
+    df = pd.read_sql(sql.text(f"SELECT * FROM bill_gpt.{bill_id}_questions_and_answers"), conn)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 682, in read_sql
+    return pandas_sql.read_query(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1776, in read_query
+    result = self.execute(sql, params)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1600, in execute
+    return self.con.execute(sql, *args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1412, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1984, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "bill_gpt.chips_questions_and_answers" does not exist
+LINE 1: SELECT * FROM bill_gpt.chips_questions_and_answers
+                      ^
+
+[SQL: SELECT * FROM bill_gpt.chips_questions_and_answers]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2023-09-24 13:20:43,933 - main - ERROR - Exception on /chips-query [GET]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "bill_gpt.chips_questions_and_answers" does not exist
+LINE 1: SELECT * FROM bill_gpt.chips_questions_and_answers
+                      ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 155, in dppa_query
+    df = get_bill_questions_and_answers("chips")
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 267, in get_bill_questions_and_answers
+    df = pd.read_sql(sql.text(f"SELECT * FROM bill_gpt.{bill_id}_questions_and_answers"), conn)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 682, in read_sql
+    return pandas_sql.read_query(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1776, in read_query
+    result = self.execute(sql, params)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1600, in execute
+    return self.con.execute(sql, *args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1412, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1984, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "bill_gpt.chips_questions_and_answers" does not exist
+LINE 1: SELECT * FROM bill_gpt.chips_questions_and_answers
+                      ^
+
+[SQL: SELECT * FROM bill_gpt.chips_questions_and_answers]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2023-09-24 13:21:50,380 - main - ERROR - Exception on /chips-q-and-a [GET]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "bill_gpt.chips_questions_and_answers" does not exist
+LINE 1: SELECT * FROM bill_gpt.chips_questions_and_answers
+                      ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 110, in chips_q_and_a
+    df = get_bill_questions_and_answers("chips")
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 267, in get_bill_questions_and_answers
+    df = pd.read_sql(sql.text(f"SELECT * FROM bill_gpt.{bill_id}_questions_and_answers"), conn)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 682, in read_sql
+    return pandas_sql.read_query(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1776, in read_query
+    result = self.execute(sql, params)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1600, in execute
+    return self.con.execute(sql, *args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1412, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1984, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "bill_gpt.chips_questions_and_answers" does not exist
+LINE 1: SELECT * FROM bill_gpt.chips_questions_and_answers
+                      ^
+
+[SQL: SELECT * FROM bill_gpt.chips_questions_and_answers]
+(Background on this error at: https://sqlalche.me/e/20/f405)

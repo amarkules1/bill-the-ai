@@ -12,6 +12,15 @@
                       <router-link class="nav-link" active-class="active" to="/home">Home</router-link>
                     </li>
                     <li class="nav-item">
+                      <router-link class="nav-link" active-class="active" to="/q_and_a/ira">Inflation Reduction Act</router-link>
+                    </li>
+                    <li class="nav-item">
+                      <router-link class="nav-link" active-class="active" to="/q_and_a/fra">Fiscal Responsibility Act</router-link>
+                    </li>
+                    <li class="nav-item">
+                      <router-link class="nav-link" active-class="active" to="/q_and_a/chips">CHIPS and Science Act</router-link>
+                    </li>
+                    <li class="nav-item">
                       <router-link class="nav-link" active-class="active" to="/signup">Get Updates</router-link>
                     </li>
                     <li class="nav-item">
