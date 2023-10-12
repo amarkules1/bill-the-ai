@@ -4,7 +4,7 @@ import sqlalchemy as sa
 
 
 class BillDetailRepository:
-    table_name = 'bill_details_v2'
+    table_name = 'bill_gpt.bill_details_v2'
 
     def get_all(self):
         conn = get_connection()

@@ -6,7 +6,7 @@ import sqlalchemy as sa
 class BillLikesRepository:
     def get_like_ct_for_bill(self, bill_id):
         conn = get_connection()
-        query = sa.text(f"SELECT count(*) FROM bill_likes where bill_id = :bill_id")
+        query = sa.text(f"SELECT count(*) FROM bill_gpt.bill_likes where bill_id = :bill_id")
         exe = conn.execute(query)
         row_count = exe.scalar()
         conn.commit()
@@ -15,7 +15,7 @@ class BillLikesRepository:
 
     def get_all_like_counts(self):
         conn = get_connection()
-        query = sa.text(f"SELECT bill_id, count(*) FROM bill_likes group by bill_id")
+        query = sa.text(f"SELECT bill_id, count(*) FROM bill_gpt.bill_likes group by bill_id")
         result = pd.read_sql(query, conn)
         conn.commit()
         conn.close()
@@ -23,7 +23,7 @@ class BillLikesRepository:
 
     def get_likes_for_user(self, user_id):
         conn = get_connection()
-        query = sa.text(f"SELECT * FROM bill_likes where user_id = :user_id")
+        query = sa.text(f"SELECT * FROM bill_gpt.bill_likes where user_id = :user_id")
         query = query.bindparams(user_id=user_id)
         result = pd.read_sql(query, conn)
         conn.commit()

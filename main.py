@@ -18,7 +18,8 @@ from llama_index.indices.vector_store import VectorStoreIndex
 
 from dotenv import load_dotenv, find_dotenv
 
-from email_verification import welcome_email
+from email_verification import welcome_email, account_verification
+from repositories.user_account_repository import UserAccountRepository
 
 _ = load_dotenv(find_dotenv())  # read local .env file
 
@@ -86,6 +87,8 @@ index_lookup = {
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,6}$')
+
+user_account_repository = UserAccountRepository()
 
 
 @app.route('/')
@@ -247,6 +250,28 @@ def verify_email():
     conn.execute(upd)
     conn.commit()
     conn.close()
+    return {"success": True}
+
+
+@app.route('/create-account', methods=['POST'])
+def create_account():
+    body = request.get_json()
+    #required fields: email, password, user_name
+    if body is None or 'email' not in body.keys() or 'password' not in body.keys() or 'user_name' not in body.keys():
+        return {"error": "Missing Request Params"}, 400
+    email = body['email']
+    password = body['password']
+    user_name = body['user_name']
+    feature_emails = body['feature_emails'] if 'feature_emails' in body.keys() else False
+    if not EMAIL_REGEX.match(email):
+        return {"error": "Please provide a valid email address"}, 400
+    if len(user_account_repository.get_user_by_email(email)) > 0:
+        return {"error": "Email already in use"}, 400
+    if len(user_account_repository.get_user_by_user_name(user_name)) > 0:
+        return {"error": "Username already in use"}, 400
+    user_account_repository.create_user(user_name, email, password, feature_emails)
+    verification_token = user_account_repository.get_verification_token(email)
+    account_verification.send_email(email, verification_token)
     return {"success": True}
 
 

@@ -1,5 +1,5 @@
 create table bill_gpt.user_account(
-	user_id UUID PRIMARY key,
+	user_id UUID PRIMARY key default gen_random_uuid(),
 	user_name varchar not null,
 	email varchar not null,
 	password varchar not null,
