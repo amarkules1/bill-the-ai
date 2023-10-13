@@ -306,3 +306,258 @@ LINE 1: SELECT * FROM bill_gpt.chips_questions_and_answers
 
 [SQL: SELECT * FROM bill_gpt.chips_questions_and_answers]
 (Background on this error at: https://sqlalche.me/e/20/f405)
+2023-10-11 20:33:35,562 - main - ERROR - Exception on /create-account [POST]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "user_account" does not exist
+LINE 1: insert into user_account (user_name, email, password, featur...
+                    ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 266, in create_account
+    user_account_repository.create_user(user_name, email, password, feature_emails)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\repositories\user_account_repository.py", line 16, in create_user
+    conn.execute(query)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1412, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1984, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "user_account" does not exist
+LINE 1: insert into user_account (user_name, email, password, featur...
+                    ^
+
+[SQL: insert into user_account (user_name, email, password, feature_emails) values(%(user_name)s, %(email)s, %(password)s, %(feature_emails)s)]
+[parameters: {'user_name': 'amarkules', 'email': 'amarlar2354@gmail.com', 'password': 'password', 'feature_emails': False}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2023-10-11 20:35:30,246 - main - ERROR - Exception on /create-account [POST]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.NotNullViolation: null value in column "user_id" of relation "user_account" violates not-null constraint
+DETAIL:  Failing row contains (null, amarkules, amarlar2354@gmail.com, password, 2023-10-12 00:35:30.202855+00, 2023-10-12 00:35:30.202855+00, f, f, 332c4832-99f8-45bc-9768-93cea2367e8e, null, null, null, null).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 266, in create_account
+    user_account_repository.create_user(user_name, email, password, feature_emails)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\repositories\user_account_repository.py", line 16, in create_user
+    conn.execute(query)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1412, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1984, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.NotNullViolation) null value in column "user_id" of relation "user_account" violates not-null constraint
+DETAIL:  Failing row contains (null, amarkules, amarlar2354@gmail.com, password, 2023-10-12 00:35:30.202855+00, 2023-10-12 00:35:30.202855+00, f, f, 332c4832-99f8-45bc-9768-93cea2367e8e, null, null, null, null).
+
+[SQL: insert into bill_gpt.user_account (user_name, email, password, feature_emails) values(%(user_name)s, %(email)s, %(password)s, %(feature_emails)s)]
+[parameters: {'user_name': 'amarkules', 'email': 'amarlar2354@gmail.com', 'password': 'password', 'feature_emails': False}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2023-10-11 20:46:23,011 - main - ERROR - Exception on /create-account [POST]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "user_account" does not exist
+LINE 1: ...ed, session_token, session_token_expires_at  from user_accou...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 268, in create_account
+    if len(user_account_repository.get_user_by_email(email)) > 0:
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\repositories\user_account_repository.py", line 85, in get_user_by_email
+    result = pd.read_sql(query, conn)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 682, in read_sql
+    return pandas_sql.read_query(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1776, in read_query
+    result = self.execute(sql, params)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1600, in execute
+    return self.con.execute(sql, *args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1412, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1984, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "user_account" does not exist
+LINE 1: ...ed, session_token, session_token_expires_at  from user_accou...
+                                                             ^
+
+[SQL: select user_name, user_id, email, feature_emails, email_verified, session_token, session_token_expires_at  from user_account where email = %(email)s]
+[parameters: {'email': 'amarlar2354@gmail.com'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2023-10-12 22:58:53,504 - main - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 301, in login
+    result = user_account_repository.login(email_user, password)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\repositories\user_account_repository.py", line 29, in login
+    if result['session_token_expires_at'] is None or result['session_token_expires_at'][0] < datetime.datetime.now():
+TypeError: '<' not supported between instances of 'NoneType' and 'datetime.datetime'
+2023-10-12 22:59:48,135 - main - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 304, in login
+    return result.to_json(orient="records")
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\core\generic.py", line 2629, in to_json
+    return json.to_json(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\json\_json.py", line 205, in to_json
+    ).write()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\json\_json.py", line 258, in write
+    return ujson_dumps(
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb2 in position 53: invalid start byte
+2023-10-12 22:59:53,600 - main - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 301, in login
+    result = user_account_repository.login(email_user, password)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\repositories\user_account_repository.py", line 29, in login
+    if result['session_token_expires_at'][0] is None or result['session_token_expires_at'][0] < datetime.datetime.now():
+  File "timestamps.pyx", line 338, in pandas._libs.tslibs.timestamps._Timestamp.__richcmp__
+TypeError: can't compare offset-naive and offset-aware datetimes
+2023-10-12 23:02:08,040 - main - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 304, in login
+    return result.to_json(orient="records")
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\core\generic.py", line 2629, in to_json
+    return json.to_json(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\json\_json.py", line 205, in to_json
+    ).write()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\json\_json.py", line 258, in write
+    return ujson_dumps(
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb2 in position 53: invalid start byte
+2023-10-12 23:03:57,783 - main - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 304, in login
+    return result.to_json()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\core\generic.py", line 2629, in to_json
+    return json.to_json(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\json\_json.py", line 205, in to_json
+    ).write()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\json\_json.py", line 258, in write
+    return ujson_dumps(
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb2 in position 63: invalid start byte
