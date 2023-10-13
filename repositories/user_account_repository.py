@@ -5,6 +5,7 @@ import pandas as pd
 
 from repositories.db_utils import get_connection
 import sqlalchemy as sa
+import pytz
 
 class UserAccountRepository:
 
@@ -19,14 +20,14 @@ class UserAccountRepository:
 
     def login(self, email_user, password):
         conn = get_connection()
-        query = sa.text("select user_name, user_id, email, feature_emails, email_verified, session_token, session_token_expires_at "
+        query = sa.text("select user_name, email, feature_emails, email_verified, session_token, session_token_expires_at "
                         " from bill_gpt.user_account where (email = :email_user or user_name = :email_user)"
-                        " and password = :password")
+                        " and password = :password and email_verified = true")
         query = query.bindparams(email_user=email_user, password=password)
         result = pd.read_sql(query, conn)
         if len(result) == 0:
             return None
-        if result['session_token_expires_at'] is None or result['session_token_expires_at'][0] < datetime.datetime.now():
+        if result['session_token_expires_at'][0] is None or result['session_token_expires_at'][0] < pytz.UTC.localize(datetime.datetime.now()):
             session_token = str(uuid.uuid4())
             session_token_expires_at = datetime.datetime.now() + datetime.timedelta(days=1)
             query = sa.text("update bill_gpt.user_account set session_token = :session_token, session_token_expires_at = :session_token_expires_at "
@@ -37,6 +38,8 @@ class UserAccountRepository:
             conn.commit()
             result['session_token'] = session_token
             result['session_token_expires_at'] = session_token_expires_at
+        result['session_token'] = result['session_token'].astype(str)
+
         conn.commit()
         conn.close()
         return result
@@ -59,10 +62,13 @@ class UserAccountRepository:
 
     def login_by_token(self, session_token):
         conn = get_connection()
-        query = sa.text("select user_name, user_id, email, feature_emails, email_verified, session_token, session_token_expires_at "
-                        "from bill_gpt.user_account where session_token = :session_token and session_token_expires_at > now()")
+        query = sa.text("select user_name, email, feature_emails, email_verified, session_token, session_token_expires_at "
+                        "from bill_gpt.user_account where session_token = :session_token and session_token_expires_at > now() and email_verified = true")
         query = query.bindparams(session_token=session_token)
         result = pd.read_sql(query, conn)
+        if len(result) == 0:
+            return None
+        result['session_token'] = result['session_token'].astype(str)
         conn.commit()
         conn.close()
         return result

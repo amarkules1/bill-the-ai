@@ -253,6 +253,15 @@ def verify_email():
     return {"success": True}
 
 
+@app.route('/verify-account', methods=['POST'])
+def verify_account():
+    body = request.get_json()
+    if body is None or 'email' not in body.keys() or 'token' not in body.keys():
+        return {"error": "Missing Request Params"}, 400
+    user_account_repository.verify_email(body['email'], body['token'])
+    return {"success": True}
+
+
 @app.route('/create-account', methods=['POST'])
 def create_account():
     body = request.get_json()
@@ -273,6 +282,26 @@ def create_account():
     verification_token = user_account_repository.get_verification_token(email)
     account_verification.send_email(email, verification_token)
     return {"success": True}
+
+@app.route('/login', methods=['POST'])
+def login():
+    body = request.get_json()
+    if body is None:
+        return {"error": "Missing Request Params"}, 400
+    if 'token' in body.keys():
+        token = body['token']
+        result = user_account_repository.login_by_token(token)
+        if result is None:
+            return {"error": "Invalid Token"}, 400
+        return result.iloc[0].to_json(orient="records")
+    if 'email_user' not in body.keys() or 'password' not in body.keys():
+        return {"error": "Missing Request Params"}, 400
+    email_user = body['email_user']
+    password = body['password']
+    result = user_account_repository.login(email_user, password)
+    if result is None:
+        return {"error": "Invalid Credentials"}, 400
+    return result.iloc[0].to_json()
 
 
 def run_query(query, bill_id):
@@ -301,3 +330,6 @@ def get_connection():
 
 def get_similarity_score(st1, st2):
     return 1 - (lev(st1, st2) / max(len(st1), len(st2)))
+
+if __name__ == '__main__':
+    app.run()
