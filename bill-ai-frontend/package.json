@@ -12,6 +12,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.3.1",
     "core-js": "^3.8.3",
+    "vee-validate": "^4.11.8",
     "vue": "^3.2.13",
     "vue-router": "^4.2.4"
   },
