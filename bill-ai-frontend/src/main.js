@@ -8,6 +8,7 @@ import UnsubComponent from './components/UnsubComponent.vue'
 import FeedbackComponent from './components/FeedbackComponent.vue'
 import EmailVerificationComponent from './components/EmailVerificationComponent.vue'
 import IntroComponent from './components/IntroComponent.vue'
+import LoginComponent from './components/LoginComponent.vue'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 import ValidationProvider from 'vee-validate'
@@ -19,6 +20,7 @@ const router = createRouter({
         { path: '/q_and_a/:bill_id', component: QuestionsAndAnswers },
         { path: '/email-signup', component: EmailSignupComponent },
         { path: '/signup', component: SignupComponent },
+        { path: '/login', component: LoginComponent },
         { path: '/unsubscribe', component: UnsubComponent },
         { path: '/feedback', component: FeedbackComponent },
         { path: '/verify/:email/:id', component: EmailVerificationComponent },

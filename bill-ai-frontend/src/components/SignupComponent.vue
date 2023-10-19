@@ -19,7 +19,7 @@
                     <p v-if="!validatePassword()">Password must be 8 characters or more.</p>
                     <button v-if="!savingAccount" class="btn btn-info ml-2" @click="submit"
                         :disabled="(!validateEmail()) || (!validatePassword()) || (!validateUsername())">Submit</button>
-                    <div v-if="savingEmail" class="spinner-border" role="status">
+                    <div v-if="savingAccount" class="spinner-border" role="status">
                         <span class="sr-only"></span>
                     </div>
                 </div>

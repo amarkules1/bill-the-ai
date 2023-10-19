@@ -20,7 +20,7 @@ class UserAccountRepository:
 
     def login(self, email_user, password):
         conn = get_connection()
-        query = sa.text("select user_name, email, feature_emails, email_verified, session_token, session_token_expires_at "
+        query = sa.text("select user_id, user_name, email, feature_emails, email_verified, session_token, session_token_expires_at "
                         " from bill_gpt.user_account where (email = :email_user or user_name = :email_user)"
                         " and password = :password and email_verified = true")
         query = query.bindparams(email_user=email_user, password=password)
@@ -39,6 +39,7 @@ class UserAccountRepository:
             result['session_token'] = session_token
             result['session_token_expires_at'] = session_token_expires_at
         result['session_token'] = result['session_token'].astype(str)
+        result['user_id'] = result['user_id'].astype(str)
 
         conn.commit()
         conn.close()
