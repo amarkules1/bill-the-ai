@@ -86,7 +86,7 @@ index_lookup = {
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-EMAIL_REGEX = re.compile(r'this.em')
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,6}$')
 
 user_account_repository = UserAccountRepository()
 

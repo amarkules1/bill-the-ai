@@ -7,6 +7,7 @@ import QuestionsAndAnswers from './components/QuestionsAndAnswers.vue'
 import UnsubComponent from './components/UnsubComponent.vue'
 import FeedbackComponent from './components/FeedbackComponent.vue'
 import EmailVerificationComponent from './components/EmailVerificationComponent.vue'
+import AccountVerificationComponent from './components/AccountVerificationComponent.vue'
 import IntroComponent from './components/IntroComponent.vue'
 import LoginComponent from './components/LoginComponent.vue'
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -24,6 +25,7 @@ const router = createRouter({
         { path: '/unsubscribe', component: UnsubComponent },
         { path: '/feedback', component: FeedbackComponent },
         { path: '/verify/:email/:id', component: EmailVerificationComponent },
+        { path: '/verify-account/:email/:token', component: AccountVerificationComponent },
         { path: '/', redirect: '/home' }
     ]
 })
