@@ -293,7 +293,7 @@ def login():
         result = user_account_repository.login_by_token(token)
         if result is None:
             return {"error": "Invalid Token"}, 400
-        return result.iloc[0].to_json(orient="records")
+        return result.iloc[0].to_json()
     if 'email_user' not in body.keys() or 'password' not in body.keys():
         return {"error": "Missing Request Params"}, 400
     email_user = body['email_user']

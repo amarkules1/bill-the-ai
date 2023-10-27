@@ -10,6 +10,7 @@ import EmailVerificationComponent from './components/EmailVerificationComponent.
 import AccountVerificationComponent from './components/AccountVerificationComponent.vue'
 import IntroComponent from './components/IntroComponent.vue'
 import LoginComponent from './components/LoginComponent.vue'
+import AccountComponent from './components/AccountComponent.vue'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 import ValidationProvider from 'vee-validate'
@@ -26,6 +27,7 @@ const router = createRouter({
         { path: '/feedback', component: FeedbackComponent },
         { path: '/verify/:email/:id', component: EmailVerificationComponent },
         { path: '/verify-account/:email/:token', component: AccountVerificationComponent },
+        { path: '/account', component: AccountComponent },
         { path: '/', redirect: '/home' }
     ]
 })

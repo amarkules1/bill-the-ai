@@ -5,6 +5,7 @@ export default class Account {
         this.username = '';
         this.sessionToken = '';
         this.userId = '';
+        this.email = '';
         this.tokenInvalid = false;
     }
 
@@ -20,7 +21,8 @@ export default class Account {
             try {
                 let resp = await axios.post('/login', { token: token })
                 this.username = resp.data.user_name
-                this.sessionToken = resp.data.token
+                this.email = resp.data.email
+                this.sessionToken = resp.data.session_token
                 this.userId = resp.data.user_id
                 return true;
             } catch (err) {
@@ -36,6 +38,7 @@ export default class Account {
         try {
             let resp = await axios.post('/login', { email_user: username, password: password })
             this.username = resp.data.user_name
+            this.email = resp.data.email
             this.sessionToken = resp.data.session_token
             this.userId = resp.data.user_id
             localStorage.setItem('token', resp.data.session_token)

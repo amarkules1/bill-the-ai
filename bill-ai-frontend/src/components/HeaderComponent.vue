@@ -29,6 +29,9 @@
               <router-link class="nav-link" active-class="active" to="/login">Log In</router-link>
             </li>
             <li class="nav-item" v-if="isLoggedIn">
+              <router-link class="nav-link" active-class="active" to="/account">Account</router-link>
+            </li>
+            <li class="nav-item" v-if="isLoggedIn">
               <a class="nav-link" @click="logout">Log Out</a>
             </li>
           </ul>
