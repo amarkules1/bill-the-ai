@@ -1,4 +1,5 @@
 import axios from 'axios';
+import crypto from 'crypto';
 
 export default class Account {
     constructor() {
@@ -36,7 +37,10 @@ export default class Account {
 
     async login (username, password) {
         try {
-            let resp = await axios.post('/login', { email_user: username, password: password })
+            let passwordHash = crypto.createHash("md5");
+            passwordHash.update(password);
+            passwordHash = passwordHash.digest('hex');
+            let resp = await axios.post('/login', { email_user: username, password: passwordHash })
             this.username = resp.data.user_name
             this.email = resp.data.email
             this.sessionToken = resp.data.session_token

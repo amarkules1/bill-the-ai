@@ -39,6 +39,8 @@
     
 <script>
 import axios from 'axios';
+import crypto from 'crypto';
+
 export default {
     name: 'SignupComponent',
 
@@ -57,7 +59,10 @@ export default {
     methods: {
         async submit() {
             this.savingAccount = true;
-            this.loadingQuery = true; axios.post('/create-account', { email: this.userEmail, user_name: this.userName, password: this.password })
+            let passwordHash = crypto.createHash("md5");
+            passwordHash.update(this.password);
+            passwordHash = passwordHash.digest('hex');
+            this.loadingQuery = true; axios.post('/create-account', { email: this.userEmail, user_name: this.userName, password: passwordHash })
                 .then(() => {
                     this.isSuccess = true;
                     this.savingAccount = false;
