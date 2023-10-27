@@ -646,3 +646,402 @@ Traceback (most recent call last):
   File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\json\_json.py", line 258, in write
     return ujson_dumps(
 UnicodeDecodeError: 'utf-8' codec can't decode byte 0x8d in position 28: invalid start byte
+2023-10-26 19:44:45,185 - main - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type uuid: "undefined"
+LINE 1: ... from bill_gpt.user_account where session_token = 'undefined...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 293, in login
+    result = user_account_repository.login_by_token(token)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\repositories\user_account_repository.py", line 69, in login_by_token
+    result = pd.read_sql(query, conn)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 682, in read_sql
+    return pandas_sql.read_query(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1776, in read_query
+    result = self.execute(sql, params)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1600, in execute
+    return self.con.execute(sql, *args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1412, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1984, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.DataError: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type uuid: "undefined"
+LINE 1: ... from bill_gpt.user_account where session_token = 'undefined...
+                                                             ^
+
+[SQL: select user_name, email, feature_emails, email_verified, session_token, session_token_expires_at from bill_gpt.user_account where session_token = %(session_token)s and session_token_expires_at > now() and email_verified = true]
+[parameters: {'session_token': 'undefined'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2023-10-26 19:50:37,613 - main - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type uuid: "undefined"
+LINE 1: ... from bill_gpt.user_account where session_token = 'undefined...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 293, in login
+    result = user_account_repository.login_by_token(token)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\repositories\user_account_repository.py", line 69, in login_by_token
+    result = pd.read_sql(query, conn)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 682, in read_sql
+    return pandas_sql.read_query(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1776, in read_query
+    result = self.execute(sql, params)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1600, in execute
+    return self.con.execute(sql, *args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1412, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1984, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.DataError: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type uuid: "undefined"
+LINE 1: ... from bill_gpt.user_account where session_token = 'undefined...
+                                                             ^
+
+[SQL: select user_name, email, feature_emails, email_verified, session_token, session_token_expires_at from bill_gpt.user_account where session_token = %(session_token)s and session_token_expires_at > now() and email_verified = true]
+[parameters: {'session_token': 'undefined'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2023-10-26 19:51:27,876 - main - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type uuid: "undefined"
+LINE 1: ... from bill_gpt.user_account where session_token = 'undefined...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 293, in login
+    result = user_account_repository.login_by_token(token)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\repositories\user_account_repository.py", line 69, in login_by_token
+    result = pd.read_sql(query, conn)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 682, in read_sql
+    return pandas_sql.read_query(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1776, in read_query
+    result = self.execute(sql, params)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1600, in execute
+    return self.con.execute(sql, *args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1412, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1984, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.DataError: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type uuid: "undefined"
+LINE 1: ... from bill_gpt.user_account where session_token = 'undefined...
+                                                             ^
+
+[SQL: select user_name, email, feature_emails, email_verified, session_token, session_token_expires_at from bill_gpt.user_account where session_token = %(session_token)s and session_token_expires_at > now() and email_verified = true]
+[parameters: {'session_token': 'undefined'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2023-10-26 19:51:55,338 - main - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type uuid: "undefined"
+LINE 1: ... from bill_gpt.user_account where session_token = 'undefined...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 293, in login
+    result = user_account_repository.login_by_token(token)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\repositories\user_account_repository.py", line 69, in login_by_token
+    result = pd.read_sql(query, conn)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 682, in read_sql
+    return pandas_sql.read_query(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1776, in read_query
+    result = self.execute(sql, params)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1600, in execute
+    return self.con.execute(sql, *args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1412, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1984, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.DataError: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type uuid: "undefined"
+LINE 1: ... from bill_gpt.user_account where session_token = 'undefined...
+                                                             ^
+
+[SQL: select user_name, email, feature_emails, email_verified, session_token, session_token_expires_at from bill_gpt.user_account where session_token = %(session_token)s and session_token_expires_at > now() and email_verified = true]
+[parameters: {'session_token': 'undefined'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2023-10-26 19:51:59,244 - main - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type uuid: "undefined"
+LINE 1: ... from bill_gpt.user_account where session_token = 'undefined...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 293, in login
+    result = user_account_repository.login_by_token(token)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\repositories\user_account_repository.py", line 69, in login_by_token
+    result = pd.read_sql(query, conn)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 682, in read_sql
+    return pandas_sql.read_query(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1776, in read_query
+    result = self.execute(sql, params)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1600, in execute
+    return self.con.execute(sql, *args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1412, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1984, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.DataError: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type uuid: "undefined"
+LINE 1: ... from bill_gpt.user_account where session_token = 'undefined...
+                                                             ^
+
+[SQL: select user_name, email, feature_emails, email_verified, session_token, session_token_expires_at from bill_gpt.user_account where session_token = %(session_token)s and session_token_expires_at > now() and email_verified = true]
+[parameters: {'session_token': 'undefined'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2023-10-26 19:52:34,760 - main - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type uuid: "undefined"
+LINE 1: ... from bill_gpt.user_account where session_token = 'undefined...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 293, in login
+    result = user_account_repository.login_by_token(token)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\repositories\user_account_repository.py", line 69, in login_by_token
+    result = pd.read_sql(query, conn)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 682, in read_sql
+    return pandas_sql.read_query(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1776, in read_query
+    result = self.execute(sql, params)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1600, in execute
+    return self.con.execute(sql, *args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1412, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1984, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.DataError: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type uuid: "undefined"
+LINE 1: ... from bill_gpt.user_account where session_token = 'undefined...
+                                                             ^
+
+[SQL: select user_name, email, feature_emails, email_verified, session_token, session_token_expires_at from bill_gpt.user_account where session_token = %(session_token)s and session_token_expires_at > now() and email_verified = true]
+[parameters: {'session_token': 'undefined'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2023-10-26 19:53:37,604 - main - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type uuid: "undefined"
+LINE 1: ... from bill_gpt.user_account where session_token = 'undefined...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\main.py", line 293, in login
+    result = user_account_repository.login_by_token(token)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\repositories\user_account_repository.py", line 69, in login_by_token
+    result = pd.read_sql(query, conn)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 682, in read_sql
+    return pandas_sql.read_query(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1776, in read_query
+    result = self.execute(sql, params)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\pandas\io\sql.py", line 1600, in execute
+    return self.con.execute(sql, *args)
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1412, in execute
+    return meth(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1984, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\base.py", line 1965, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\amarl\dev\bill-the-ai\bill-the-ai\.venv\lib\site-packages\sqlalchemy\engine\default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.DataError: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type uuid: "undefined"
+LINE 1: ... from bill_gpt.user_account where session_token = 'undefined...
+                                                             ^
+
+[SQL: select user_name, email, feature_emails, email_verified, session_token, session_token_expires_at from bill_gpt.user_account where session_token = %(session_token)s and session_token_expires_at > now() and email_verified = true]
+[parameters: {'session_token': 'undefined'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)

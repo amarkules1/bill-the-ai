@@ -32,9 +32,8 @@
 </template>
     
 <script>
-import axios from 'axios';
 export default {
-    name: 'SignupComponent',
+    name: 'LoginComponent',
 
     data() {
         return {
@@ -43,24 +42,26 @@ export default {
             isSuccess: false,
             isError: false,
             loggingIn: false,
+            account: this.$root.$refs.Account,
         };
     },
     methods: {
         async submit() {
             this.loggingIn = true;
             this.isError = false;
-            this.loadingQuery = true; axios.post('/login', { email_user: this.userNameOrEmail, password: this.password })
-                .then(() => {
-                    this.isSuccess = true;
-                    this.loggingIn = false;
-                    this.$router.push('/')
-                })
-                .catch(() => {
-                    this.isError = true;
-                    this.userNameOrEmail = '';
-                    this.password = '';
-                    this.loggingIn = false;
-                });
+            this.loadingQuery = true; 
+            let success = await this.account.login(this.userNameOrEmail, this.password);
+            if (success) {
+                this.isSuccess = true;
+                this.loggingIn = false;
+                this.$root.$refs.HeaderComponent.isLoggedIn = true;
+                this.$router.push('/')
+            } else {
+                this.isError = true;
+                this.userNameOrEmail = '';
+                this.password = '';
+                this.loggingIn = false;
+            }
         },
 
         validatePassword() {

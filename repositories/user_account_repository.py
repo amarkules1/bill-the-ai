@@ -63,13 +63,14 @@ class UserAccountRepository:
 
     def login_by_token(self, session_token):
         conn = get_connection()
-        query = sa.text("select user_name, email, feature_emails, email_verified, session_token, session_token_expires_at "
+        query = sa.text("select user_id, user_name, email, feature_emails, email_verified, session_token, session_token_expires_at "
                         "from bill_gpt.user_account where session_token = :session_token and session_token_expires_at > now() and email_verified = true")
         query = query.bindparams(session_token=session_token)
         result = pd.read_sql(query, conn)
         if len(result) == 0:
             return None
         result['session_token'] = result['session_token'].astype(str)
+        result['user_id'] = result['user_id'].astype(str)
         conn.commit()
         conn.close()
         return result
