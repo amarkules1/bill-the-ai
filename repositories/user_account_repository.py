@@ -113,3 +113,19 @@ class UserAccountRepository:
         conn.commit()
         conn.close()
         return result['email_verification_token'][0] if len(result) > 0 else None
+
+    def generate_reset_token(self, email) -> str:
+        token = str(uuid.uuid4())
+        expiry = datetime.datetime.now() + datetime.timedelta(days=1)
+        conn = get_connection()
+        query = sa.text("update bill_gpt.user_account "
+                        "set password_reset_token = :password_reset_token, "
+                        "password_reset_token_expires_at = :password_reset_token_expires_at "
+                        "where email = :email")
+        query = query.bindparams(email=email, password_reset_token=token, password_reset_token_expires_at=expiry)
+        result = conn.execute(query)
+        if result.rowcount == 0:
+            token = None
+        conn.commit()
+        conn.close()
+        return token

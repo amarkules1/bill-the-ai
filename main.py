@@ -18,7 +18,7 @@ from llama_index.indices.vector_store import VectorStoreIndex
 
 from dotenv import load_dotenv, find_dotenv
 
-from email_verification import welcome_email, account_verification
+from email_verification import welcome_email, account_verification, password_reset
 from repositories.user_account_repository import UserAccountRepository
 
 _ = load_dotenv(find_dotenv())  # read local .env file
@@ -302,6 +302,19 @@ def login():
     if result is None:
         return {"error": "Invalid Credentials"}, 400
     return result.iloc[0].to_json()
+
+
+@app.route('/send-password-reset', methods=['POST'])
+def send_password_reset():
+    body = request.get_json()
+    if body is None or 'email' not in body.keys():
+        return {"error": "Missing Request Params"}, 400
+    email = body['email']
+    token = user_account_repository.generate_reset_token(email)
+    if token is not None:
+        password_reset.send_email(email, token)
+        return {"success": True}
+    return {"error": "Invalid Email"}, 400
 
 
 def run_query(query, bill_id):
