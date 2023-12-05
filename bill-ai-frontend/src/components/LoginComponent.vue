@@ -21,6 +21,7 @@
                     <div v-if="loggingIn" class="spinner-border" role="status">
                         <span class="sr-only"></span>
                     </div>
+                    <p><router-link to="/request-password-reset">Request Password Reset</router-link></p>
                 </div>
             </div>
             <div class="subscribe col-md-8" v-if="isSuccess">

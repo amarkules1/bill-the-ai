@@ -62,7 +62,8 @@ export default {
             let passwordHash = crypto.createHash("md5");
             passwordHash.update(this.password);
             passwordHash = passwordHash.digest('hex');
-            this.loadingQuery = true; axios.post('/create-account', { email: this.userEmail, user_name: this.userName, password: passwordHash })
+            this.loadingQuery = true; 
+            axios.post('/create-account', { email: this.userEmail, user_name: this.userName, password: passwordHash })
                 .then(() => {
                     this.isSuccess = true;
                     this.savingAccount = false;

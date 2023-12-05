@@ -1,8 +1,10 @@
 <template>
     <div>
         <div v-if="isLoaded">
+            <br/>
             <p>Username: {{ userName }}</p>
             <p>Email: {{ email }}</p>
+            <p><router-link to="/request-password-reset">Request Password Reset</router-link></p>
         </div>
         <div v-if="!isLoaded" class="spinner-border" role="status">
             <span class="sr-only"></span>

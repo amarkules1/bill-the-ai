@@ -317,12 +317,13 @@ def send_password_reset():
     return {"error": "Invalid Email"}, 400
 
 
-@app.route('/validate-password-reset', methods=['GET'])
+@app.route('/validate-password-reset', methods=['POST'])
 def validate_password_reset():
-    email = request.args.get('email')
-    token = request.args.get('token')
-    if email is None or token is None:
+    body = request.get_json()
+    if body is None or 'email' not in body.keys() or 'token' not in body.keys():
         return {"error": "Missing Request Params"}, 400
+    email = body['email']
+    token = body['token']
     if not EMAIL_REGEX.match(email):
         return {"error": "Please provide a valid email address"}, 400
     if user_account_repository.validate_reset_token(email, token):
