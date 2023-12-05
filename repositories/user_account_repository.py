@@ -129,3 +129,29 @@ class UserAccountRepository:
         conn.commit()
         conn.close()
         return token
+
+    def validate_reset_token(self, email, token) -> bool:
+        conn = get_connection()
+        query = sa.text("select count(*) from bill_gpt.user_account "
+                        "where email = :email and password_reset_token = :password_reset_token "
+                        "and password_reset_token_expires_at > now()")
+        query = query.bindparams(email=email, password_reset_token=token)
+        result = conn.execute(query)
+        row_count = result.scalar()
+        conn.commit()
+        conn.close()
+        return row_count > 0
+
+    def reset_password(self, email, token, password) -> bool:
+        conn = get_connection()
+        query = sa.text("update bill_gpt.user_account "
+                        "set password = :password, "
+                        "password_reset_token = null, "
+                        "password_reset_token_expires_at = null "
+                        "where email = :email and password_reset_token = :password_reset_token "
+                        "and password_reset_token_expires_at > now()")
+        query = query.bindparams(email=email, password_reset_token=token, password=password)
+        result = conn.execute(query)
+        conn.commit()
+        conn.close()
+        return result.rowcount > 0

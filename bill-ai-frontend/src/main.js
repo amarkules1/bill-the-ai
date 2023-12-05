@@ -11,6 +11,7 @@ import AccountVerificationComponent from './components/AccountVerificationCompon
 import IntroComponent from './components/IntroComponent.vue'
 import LoginComponent from './components/LoginComponent.vue'
 import AccountComponent from './components/AccountComponent.vue'
+import PasswordResetRequest from './components/PasswordResetRequest.vue'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 import ValidationProvider from 'vee-validate'
@@ -28,6 +29,7 @@ const router = createRouter({
         { path: '/verify/:email/:id', component: EmailVerificationComponent },
         { path: '/verify-account/:email/:token', component: AccountVerificationComponent },
         { path: '/account', component: AccountComponent },
+        { path: '/request-password-reset', component: PasswordResetRequest },
         { path: '/', redirect: '/home' }
     ]
 })

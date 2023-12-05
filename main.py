@@ -317,6 +317,35 @@ def send_password_reset():
     return {"error": "Invalid Email"}, 400
 
 
+@app.route('/validate-password-reset', methods=['GET'])
+def validate_password_reset():
+    email = request.args.get('email')
+    token = request.args.get('token')
+    if email is None or token is None:
+        return {"error": "Missing Request Params"}, 400
+    if not EMAIL_REGEX.match(email):
+        return {"error": "Please provide a valid email address"}, 400
+    if user_account_repository.validate_reset_token(email, token):
+        return {"success": True}
+    return {"error": "Invalid Token"}, 400
+
+
+@app.route('/reset-password', methods=['POST'])
+def reset_password():
+    body = request.get_json()
+    if body is None or 'email' not in body.keys() or 'token' not in body.keys() or 'password' not in body.keys():
+        return {"error": "Missing Request Params"}, 400
+    email = body['email']
+    token = body['token']
+    password = body['password']
+    if not EMAIL_REGEX.match(email):
+        return {"error": "Please provide a valid email address"}, 400
+    if user_account_repository.validate_reset_token(email, token):
+        user_account_repository.reset_password(email, token, password)
+        return {"success": True}
+    return {"error": "Invalid Token"}, 400
+
+
 def run_query(query, bill_id):
     answer = str(index_lookup[bill_id].as_query_engine().query(query))
     conn = get_connection()
