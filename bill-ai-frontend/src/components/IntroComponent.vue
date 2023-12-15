@@ -22,21 +22,39 @@
       </div>
     </div>
   </div>
+
+  <button id="show-modal" @click="showModal = true">Show Modal</button>
+
+  <div v-if="showModal">
+    <LoginPromptModal @close="showModal = false" />
+  </div>
 </template>
 
 <script>
+import LoginPromptModal from './LoginPromptModal.vue'
+
 export default {
-  name: 'IntroComponent'
+  name: 'IntroComponent',
+  components: {
+    LoginPromptModal
+  },
+  data() {
+    return {
+      showModal: false
+    };
+  }
 }
 </script>
 <style>
 .introComponent {
   display: inline-block;
 }
+
 .headshot {
   width: 30%;
 }
-.intro{
+
+.intro {
   text-align: left;
 }
 </style>
