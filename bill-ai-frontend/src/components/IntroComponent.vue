@@ -23,21 +23,12 @@
     </div>
   </div>
 
-  <button id="show-modal" @click="showModal = true">Show Modal</button>
-
-  <div v-if="showModal">
-    <LoginPromptModal @close="showModal = false" />
-  </div>
 </template>
 
 <script>
-import LoginPromptModal from './LoginPromptModal.vue'
 
 export default {
   name: 'IntroComponent',
-  components: {
-    LoginPromptModal
-  },
   data() {
     return {
       showModal: false
