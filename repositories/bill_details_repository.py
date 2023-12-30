@@ -28,6 +28,7 @@ class BillDetailRepository:
         query = sa.text(f"SELECT * FROM {self.table_name} where bill_alias = :bill_alias")
         query = query.bindparams(bill_alias=bill_alias)
         result = pd.read_sql(query, conn)
+        result['bill_id'] = result['bill_id'].astype(str)
         conn.commit()
         conn.close()
         return result

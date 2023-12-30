@@ -8,7 +8,7 @@
       <div class="intro col-md-8">
         <h1>Ask Bill a question about the {{ billSummary.bill_title }}</h1>
         <p>{{ billSummary.summary }}</p>
-        <p><a href={{billSummary.wiki_link}}>Wikipedia Link</a> &nbsp;&nbsp; <a href={{billSummary.full_text_link}}>Full
+        <p><a v-bind:href="billSummary.wiki_link">Wikipedia Link</a> &nbsp;&nbsp; <a v-bind:href="billSummary.full_text_link">Full
             Text</a></p>
       </div>
     </div>

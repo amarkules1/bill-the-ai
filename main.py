@@ -19,6 +19,7 @@ from llama_index.indices.vector_store import VectorStoreIndex
 from dotenv import load_dotenv, find_dotenv
 
 from email_verification import welcome_email, account_verification, password_reset
+from repositories.bill_details_repository import BillDetailRepository
 from repositories.user_account_repository import UserAccountRepository
 
 _ = load_dotenv(find_dotenv())  # read local .env file
@@ -89,6 +90,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,6}$')
 
 user_account_repository = UserAccountRepository()
+bill_details_repository = BillDetailRepository()
 
 
 @app.route('/')
@@ -171,12 +173,9 @@ def chips_query():
 @app.route('/bill-summary')
 def bill_summary():
     bill_id = request.args.get('bill_id')
-    conn = get_connection()
-    query = sql.text(f"SELECT * FROM bill_gpt.bill_details where bill_id = :bill_id")
-    query = query.bindparams(bill_id=bill_id)
-    df = pd.read_sql(query, conn)
-    conn.commit()
-    conn.close()
+    df = bill_details_repository.get_by_bill_alias(bill_id)
+    if df.shape[0] == 0:
+        return {}
     return df.iloc[0].to_json()
 
 
