@@ -20,6 +20,7 @@ from dotenv import load_dotenv, find_dotenv
 
 from email_verification import welcome_email, account_verification, password_reset
 from repositories.bill_details_repository import BillDetailRepository
+from repositories.questions_asked_repository import QuestionsAskedRepository
 from repositories.user_account_repository import UserAccountRepository
 
 _ = load_dotenv(find_dotenv())  # read local .env file
@@ -91,6 +92,7 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,6}$')
 
 user_account_repository = UserAccountRepository()
 bill_details_repository = BillDetailRepository()
+questions_asked_repository = QuestionsAskedRepository()
 
 
 @app.route('/')
@@ -100,19 +102,19 @@ def hello():
 
 @app.route('/ira-q-and-a')
 def ira_q_and_a():
-    df = get_bill_questions_and_answers("ira")
+    df = get_bill_questions_and_answers_by_alias("ira")
     return df.to_json(orient="records")
 
 
 @app.route('/fra-q-and-a')
 def fra_q_and_a():
-    df = get_bill_questions_and_answers("fra")
+    df = get_bill_questions_and_answers_by_alias("fra")
     return df.to_json(orient="records")
 
 
 @app.route('/chips-q-and-a')
 def chips_q_and_a():
-    df = get_bill_questions_and_answers("chips")
+    df = get_bill_questions_and_answers_by_alias("chips")
     return df.to_json(orient="records")
 
 
@@ -121,7 +123,7 @@ def ira_query():
     query = request.args.get('query')
     if query is None or len(query) < 20:
         return {}
-    df = get_bill_questions_and_answers("ira")
+    df = get_bill_questions_and_answers_by_alias("ira")
     most_similar_score = 0
     answer_row = None
     for i, row in df.iterrows():
@@ -139,7 +141,7 @@ def fra_query():
     query = request.args.get('query')
     if query is None or len(query) < 20:
         return {}
-    df = get_bill_questions_and_answers("fra")
+    df = get_bill_questions_and_answers_by_alias("fra")
     most_similar_score = 0
     answer_row = None
     for i, row in df.iterrows():
@@ -157,7 +159,7 @@ def chips_query():
     query = request.args.get('query')
     if query is None or len(query) < 20:
         return {}
-    df = get_bill_questions_and_answers("chips")
+    df = get_bill_questions_and_answers_by_alias("chips")
     most_similar_score = 0
     answer_row = None
     for i, row in df.iterrows():
@@ -358,9 +360,11 @@ def run_query(query, bill_id):
     return pd.Series(data={"answer": answer, "question": query})
 
 
-def get_bill_questions_and_answers(bill_id):
+def get_bill_questions_and_answers_by_alias(alias):
     conn = get_connection()
-    df = pd.read_sql(sql.text(f"SELECT * FROM bill_gpt.{bill_id}_questions_and_answers"), conn)
+    bill_details = bill_details_repository.get_by_bill_alias(alias)
+    bill_id = str(bill_details['bill_id'][0])
+    df = questions_asked_repository.get_questions_for_bill(bill_id)
     conn.commit()
     conn.close()
     return df
