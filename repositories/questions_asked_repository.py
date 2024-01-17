@@ -1,3 +1,5 @@
+import uuid
+
 from repositories.db_utils import get_connection
 import pandas as pd
 import sqlalchemy as sa
@@ -27,9 +29,10 @@ class QuestionsAskedRepository:
 
     def save_question(self, bill_id, asked_user_id, question, answer):
         conn = get_connection()
-        query = sa.text(f"insert into bill_gpt.questions_asked (bill_id, asked_user_id, question, answer) "
-                        f"values(:bill_id, :asked_user_id, :question, :answer)")
-        query = query.bindparams(bill_id=bill_id, asked_user_id=asked_user_id, question=question, answer=answer)
+        query = sa.text(f"insert into bill_gpt.questions_asked (question_id, bill_id, asked_user_id, question, answer) "
+                        f"values(:question_id, :bill_id, :asked_user_id, :question, :answer)")
+        query = query.bindparams(question_id=uuid.uuid4(), bill_id=bill_id, asked_user_id=asked_user_id,
+                                 question=question, answer=answer)
         conn.execute(query)
         conn.commit()
         conn.close()

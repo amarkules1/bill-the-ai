@@ -348,15 +348,10 @@ def reset_password():
     return {"error": "Invalid Token"}, 400
 
 
-def run_query(query, bill_id):
-    answer = str(index_lookup[bill_id].as_query_engine().query(query))
-    conn = get_connection()
-    ins = sqlalchemy.text(f"INSERT INTO bill_gpt.{bill_id}_questions_and_answers (question, answer) "
-                          f"VALUES (:query, :answer)")
-    ins = ins.bindparams(query=query, answer=answer)
-    conn.execute(ins)
-    conn.commit()
-    conn.close()
+def run_query(query, bill_alias, user_id=None):
+    answer = str(index_lookup[bill_alias].as_query_engine().query(query))
+    bill_id = bill_details_repository.get_by_bill_alias(bill_alias)['bill_id'][0]
+    questions_asked_repository.save_question(bill_id, user_id, query, answer)
     return pd.Series(data={"answer": answer, "question": query})
 
 
