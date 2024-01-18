@@ -65,7 +65,6 @@ export default {
     this.bill_id = route.params.bill_id;
     this.fetchSummary();
     this.fetchQuestionsAndAnswers();
-    this.$root.$refs.HeaderComponent = this;
     this.account = this.$root.$refs.Account;
     if (!this.account) {
       this.account = new Account();
